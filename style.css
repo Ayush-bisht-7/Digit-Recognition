@@ -1,0 +1,369 @@
+/* CSS reset & global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #0b0c16;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-indigo: #6366f1;
+    --accent-purple: #a855f7;
+    --accent-pink: #ec4899;
+    --canvas-bg: #000000;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+    padding: 2rem 1rem;
+}
+
+/* Background Glowing Auroras */
+.glow-sphere {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.glow-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--accent-indigo) 0%, transparent 70%);
+    top: -100px;
+    left: -100px;
+}
+
+.glow-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, var(--accent-pink) 0%, transparent 70%);
+    bottom: -150px;
+    right: -100px;
+}
+
+/* App Container */
+.app-container {
+    width: 100%;
+    max-width: 980px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+#app-title {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 30%, #a855f7 70%, #f472b6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.75rem;
+    text-shadow: 0px 4px 20px rgba(99, 102, 241, 0.15);
+}
+
+#app-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 350;
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Main Content Grid */
+.main-content {
+    display: grid;
+    grid-template-columns: minmax(320px, 1.2fr) minmax(320px, 1fr);
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Card Styling */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 2.25rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.section-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 0.75rem;
+}
+
+/* Canvas Section */
+.canvas-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+    border-radius: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.canvas-wrapper:focus-within,
+.canvas-wrapper:hover {
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.15), inset 0 0 20px rgba(0,0,0,0.8);
+}
+
+#drawing-canvas {
+    background-color: var(--canvas-bg);
+    cursor: crosshair;
+    border-radius: 8px;
+    touch-action: none; /* Prevents scrolling while drawing on mobile */
+}
+
+/* Controls styling */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.btn-icon {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.btn-secondary:hover .btn-icon {
+    transform: rotate(15deg);
+}
+
+/* Inference pulse status */
+.inference-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.02);
+    padding: 0.5rem 0.85rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+/* Results Section */
+.prediction-box {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.prediction-header {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+#predicted-digit {
+    font-family: 'Orbitron', monospace;
+    font-size: 5.5rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin: 0.25rem 0;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.prediction-footer {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+#confidence-percentage {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+/* Distribution chart styling */
+.distribution-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.subsection-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+}
+
+#digit-bars-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.digit-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.digit-label {
+    width: 15px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-align: center;
+    transition: color 0.2s ease;
+}
+
+.digit-bar-bg {
+    flex-grow: 1;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.digit-bar-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 5px;
+    background: linear-gradient(90deg, var(--accent-indigo), var(--accent-purple));
+    transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.digit-percent {
+    width: 45px;
+    text-align: right;
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+}
+
+/* Active class when a row is predicted */
+.digit-row.predicted .digit-label {
+    color: #a5b4fc;
+}
+
+.digit-row.predicted .digit-percent {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.digit-row.predicted .digit-bar-fill {
+    background: linear-gradient(90deg, #818cf8, #ec4899);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    padding-top: 1.5rem;
+    line-height: 1.6;
+}
